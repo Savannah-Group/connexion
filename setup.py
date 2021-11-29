@@ -20,7 +20,7 @@ def read_version(package):
 version = read_version('connexion')
 
 install_requires = [
-    'clickclick>=1.2,<21',
+    'clickclick>=7.1.2,<21',
     'jsonschema>=2.5.1,<4',
     'PyYAML>=5.1,<6',
     'requests>=2.9.1,<3',
@@ -30,7 +30,7 @@ install_requires = [
 ]
 
 swagger_ui_require = 'swagger-ui-bundle>=0.0.2,<0.1'
-flask_require = 'flask>=1.0.4,<3'
+flask_require = 'flask[async]==2.0.2'
 aiohttp_require = [
     'aiohttp>=2.3.10,<4',
     'aiohttp-jinja2>=0.14.0,<2'
