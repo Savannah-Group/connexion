@@ -37,7 +37,7 @@ flask_require = [
 aiohttp_require = [
     'aiohttp>=2.3.10,<4',
     'aiohttp-jinja2>=0.14.0,<2',
-    'MarkupSafe>=0.23',
+    'MarkupSafe>=2.0',
 ]
 
 tests_require = [
