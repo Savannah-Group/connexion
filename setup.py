@@ -32,7 +32,7 @@ swagger_ui_require = 'swagger-ui-bundle>=0.0.2,<0.1'
 
 flask_require = [
     'flask[async]==2.0.2',
-    'itsdangerous>=0.24',
+    'itsdangerous==2.0.1',
 ]
 aiohttp_require = [
     'aiohttp>=2.3.10,<4',
