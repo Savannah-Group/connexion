@@ -25,7 +25,7 @@ install_requires = [
     'PyYAML>=5.1,<6',
     'requests>=2.9.1,<3',
     'inflection>=0.3.1,<0.6',
-    'werkzeug>=1.0,<3',
+    'werkzeug>=2.0,<3',
 ]
 
 swagger_ui_require = 'swagger-ui-bundle>=0.0.2,<0.1'
