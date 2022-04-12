@@ -31,7 +31,10 @@ install_requires = [
     'starlette>=0.15,<1',
 ]
 
-swagger_ui_require = 'swagger-ui-bundle>=0.0.2,<0.1'
+swagger_ui_require = [
+    'swagger-ui-bundle>=0.0.2,<0.1',
+    'openapi_spec_validator==0.4.0'
+]
 
 flask_require = [
     'flask[async]==2.1.1',
