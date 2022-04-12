@@ -6,6 +6,7 @@ import sys
 import pytest
 from connexion import App
 from connexion.security import FlaskSecurityHandlerFactory
+from werkzeug.test import Client, EnvironBuilder
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -29,6 +30,38 @@ class FakeResponse:
 
     def json(self):
         return json.loads(self.text)
+
+
+def fixed_get_environ():
+    """See https://github.com/pallets/werkzeug/issues/2347"""
+
+    original_get_environ = EnvironBuilder.get_environ
+
+    def f(self):
+        result = original_get_environ(self)
+        result.pop("HTTP_CONTENT_TYPE", None)
+        result.pop("HTTP_CONTENT_LENGTH", None)
+        return result
+
+    return f
+
+
+EnvironBuilder.get_environ = fixed_get_environ()
+
+
+def buffered_open():
+    """For use with ASGI middleware"""
+
+    original_open = Client.open
+
+    def f(*args, **kwargs):
+        kwargs["buffered"] = True
+        return original_open(*args, **kwargs)
+
+    return f
+
+
+Client.open = buffered_open()
 
 
 # Helper fixtures functions
@@ -76,11 +109,6 @@ def app():
 @pytest.fixture
 def simple_api_spec_dir():
     return FIXTURES_FOLDER / 'simple'
-
-
-@pytest.fixture(scope='session')
-def aiohttp_api_spec_dir():
-    return FIXTURES_FOLDER / 'aiohttp'
 
 
 @pytest.fixture
@@ -227,8 +255,3 @@ def bad_operations_app(request):
     return build_app_from_fixture('bad_operations', request.param,
                                   resolver_error=501)
 
-
-if sys.version_info < (3, 5, 3) and sys.version_info[0] == 3:
-    @pytest.fixture
-    def aiohttp_client(test_client):
-        return test_client

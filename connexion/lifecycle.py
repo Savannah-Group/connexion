@@ -16,7 +16,8 @@ class ConnexionRequest:
                  body=None,
                  json_getter=None,
                  files=None,
-                 context=None):
+                 context=None,
+                 cookies=None):
         self.url = url
         self.method = method
         self.path_params = path_params or {}
@@ -27,10 +28,13 @@ class ConnexionRequest:
         self.json_getter = json_getter
         self.files = files
         self.context = context if context is not None else {}
+        self.cookies = cookies or {}
 
     @property
     def json(self):
-        return self.json_getter()
+        if not hasattr(self, '_json'):
+            self._json = self.json_getter()
+        return self._json
 
 
 class ConnexionResponse:

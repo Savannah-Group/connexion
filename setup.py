@@ -20,24 +20,22 @@ def read_version(package):
 version = read_version('connexion')
 
 install_requires = [
-    'jsonschema>=2.5.1,<5',
     'clickclick>=1.2,<21',
-    'PyYAML>=5.1,<6',
-    'requests>=2.9.1,<3',
+    'jsonschema>=2.5.1,<5',
+    'PyYAML>=5.1,<7',
+    'requests>=2.27,<3',
     'inflection>=0.3.1,<0.6',
-    'werkzeug>=2.0,<3',
+    'werkzeug>=2,<3',
+    'importlib-metadata>=1 ; python_version<"3.8"',
+    'packaging>=20',
+    'starlette>=0.15,<1',
 ]
 
 swagger_ui_require = 'swagger-ui-bundle>=0.0.2,<0.1'
 
 flask_require = [
-    'flask[async]==2.0.2',
-    'itsdangerous==2.0.1',
-]
-aiohttp_require = [
-    'aiohttp>=2.3.10,<4',
-    'aiohttp-jinja2>=0.14.0,<2',
-    'MarkupSafe>=2.0',
+    'flask>=2,<3',
+    'a2wsgi>=1.1,<2',
 ]
 
 tests_require = [
@@ -48,10 +46,6 @@ tests_require = [
     *flask_require,
     swagger_ui_require
 ]
-
-tests_require.extend(aiohttp_require)
-tests_require.append('pytest-aiohttp')
-tests_require.append('aiohttp-remotes')
 
 docs_require = [
     'sphinx-autoapi==1.8.1'
@@ -106,17 +100,16 @@ setup(
         'tests': tests_require,
         'flask': flask_require,
         'swagger-ui': swagger_ui_require,
-        'aiohttp': aiohttp_require,
         'docs': docs_require
     },
     cmdclass={'test': PyTest},
     test_suite='tests',
     classifiers=[
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',

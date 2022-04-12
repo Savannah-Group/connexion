@@ -271,10 +271,12 @@ paths:
         '200':
           description: OK
       requestBody:
+        x-body-name: stack
         content:
           application/json:
             schema:
-              x-body-name: stack
+              # should be ignored because the preferred location is at the requestBody level above
+              x-body-name: this_should_be_ignored
               $ref: '#/components/schemas/new_stack'
               default:
                 image_version: default_image
@@ -657,6 +659,19 @@ paths:
       parameters:
         - name: simple
           in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /test-cookie-param:
+    get:
+      summary: Test cookie parameter support.
+      operationId: fakeapi.hello.test_cookie_param
+      parameters:
+        - name: test_cookie
+          in: cookie
           required: true
           schema:
             type: string

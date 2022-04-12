@@ -96,7 +96,7 @@ def with_problem():
     raise ProblemException(type='http://www.example.com/error',
                            title='Some Error',
                            detail='Something went wrong somewhere',
-                           status=418,
+                           status=402,
                            instance='instance1',
                            headers={'x-Test-Header': 'In Test'})
 
@@ -104,7 +104,7 @@ def with_problem():
 def with_problem_txt():
     raise ProblemException(title='Some Error',
                            detail='Something went wrong somewhere',
-                           status=418,
+                           status=402,
                            instance='instance1')
 
 
@@ -328,6 +328,10 @@ def test_bool_array_param(thruthiness=None):
 
 def test_required_param(simple):
     return simple
+
+
+def test_cookie_param():
+    return {"cookie_value": request.cookies["test_cookie"]}
 
 
 def test_exploded_deep_object_param(id):
