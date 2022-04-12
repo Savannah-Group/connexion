@@ -26,7 +26,7 @@ install_requires = [
     'requests>=2.27,<3',
     'inflection>=0.3.1,<0.6',
     'werkzeug>=2,<3',
-    'importlib-metadata>=1 ; python_version<"3.8"',
+    'importlib-metadata>=3.6.0 ; python_version<"3.10"',
     'packaging>=20',
     'starlette>=0.15,<1',
 ]
